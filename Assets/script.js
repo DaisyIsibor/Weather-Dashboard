@@ -64,8 +64,9 @@ function getForecast(city){
             var date = "<strong style='font-size: larger;'>" + dateTime.toLocaleDateString() + "</strong>";
            
             // the br tag is just to display each result stack on each other 
+            var formattedDateTime = cityName + " (" + date + ")";
 
-            var todayWeatherInfo = cityName + date + "<br>" +// this displays city, date and time in one role 
+           var todayWeatherInfo = "Current Weather for " + formattedDateTime + ":<br>" +// this displays city, date and time in one role 
 
              "<img src='http://openweathermap.org/img/wn/" + weatherCallData.weather[0].icon + ".png'><br>" +
             // this displays the image instead of the description, the link on the code directs you to the images on open weather API.
@@ -79,29 +80,29 @@ function getForecast(city){
             document.getElementById("todayWeather").innerHTML = todayWeatherInfo;
             return getForecast(city);
         })
+
         .then(function(forecastData) {
-            console.log(forecastData);
+            var forecastInfo = '5-Day Forecast:<br>';
+            forecastData.list.forEach(function(dayForecast) {
+                var dateTime = new Date();
+                dateTime.setTime(dayForecast.dt * 1000);
+                var date = "<strong style='font-size: larger;'>" + dateTime.toLocaleDateString() + "</strong>";
+                var weatherIcon = "<img src='http://openweathermap.org/img/wn/" + dayForecast.weather[0].icon + ".png'>";
+                var temperature = dayForecast.main.temp + 'K';
+                
+                var weatherDescription = dayForecast.weather[0].description;
+
+                forecastInfo += "<strong>" + date + "</strong>: " +
+                    "Temperature: " + temperature + ", " +
+                    "Weather Condition: " + weatherIcon + " " + weatherDescription + '<br>';
+            });
+
+            document.getElementById("displays").innerHTML = forecastInfo;
         })
-
-// Function to display a 5 days forecast as well 
-  .then(function(forecastData){
-
-  })
-
-
-
-
-
-
-
-
-
-
-
-        // this is to help catch error if there is on the console
         .catch(function(error) {
             console.error('Error in showWeather:', error);
         });
+}
 
 
 
@@ -110,7 +111,7 @@ function getForecast(city){
 
 
 
-    }
+    
 
  document.addEventListener('DOMContentLoaded', function() {
     var button = document.getElementById('searchBtn');
