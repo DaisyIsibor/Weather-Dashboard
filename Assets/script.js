@@ -56,27 +56,35 @@ function getForecast(city){
  function showWeather(){
     var city = document.getElementById("cityName").value;
 
-   getweatherCall(city)
-   .then(function(weatherCallData){
-    var todayWeatherInfo= "Current Weather:<br>" +
-    "Temperature: " + weatherCallData.main.temp + 'K<br>' + 
-    "Weather Condition: " + weatherCallData.weather[0]. description + '<br>' +
-    "Wind Speed: "  + weatherCallData.wind.speed + 'm/s<br>' + 
-    "Humidity: " + weatherCallData.main.humidity + '%';
+    // this is a function to display the forecast weather for today and this include the name of the city, date, time and other information  to display 
+    getweatherCall(city)
+        .then(function(weatherCallData) {
+            var dateTime = new Date();
+            var date = dateTime.toDateString();
+            var time = dateTime.toLocaleTimeString();
+            var cityName = weatherCallData.name;
 
-    document.getElementById("todayWeather").innerHtml=todayWeatherInfo;
-    return getForecast(city);
+            // the br tag is just to display wach result stack on each other 
+            
+            var todayWeatherInfo = "Current Weather for " + cityName + ":<br>" +
+                "Date: " + date + "<br>" + // this displays the date 
+                "Time: " + time + "<br>" + // thus displayes the time
+            "Temperature: " + weatherCallData.main.temp + 'K<br>' +// this displays temp in kelvin
+            "Weather Condition: <img src='http://openweathermap.org/img/wn/" + weatherCallData.weather[0].icon + ".png'><br>" + // this dsplays the imgae instead of the description the link on the code directs you to the images on open weather.
+                "Wind Speed: " + weatherCallData.wind.speed + 'm/s<br>' + // this displays the wind speed in meters per seconds
+                "Humidity: " + weatherCallData.main.humidity + '%'; // this displays the himidity 
 
-})
-
- }
-
-
-
-
-
-
-
+            document.getElementById("todayWeather").innerHTML = todayWeatherInfo;
+            return getForecast(city);
+        })
+        .then(function(forecastData) {
+            console.log(forecastData);
+        })
+        // this is to help catch error if there is on the console
+        .catch(function(error) {
+            console.error('Error in showWeather:', error);
+        });
+}
 
 
 
