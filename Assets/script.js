@@ -59,20 +59,22 @@ function getForecast(city){
     // this is a function to display the forecast weather for today and this include the name of the city, date, time and other information  to display 
     getweatherCall(city)
         .then(function(weatherCallData) {
+            var cityName = "<strong style='font-size: larger;'>" + weatherCallData.name + "</strong>";
             var dateTime = new Date();
-            var date = dateTime.toDateString();
-            var time = dateTime.toLocaleTimeString();
-            var cityName = weatherCallData.name;
+            var date = "<strong style='font-size: larger;'>" + dateTime.toLocaleDateString() + "</strong>";
+           
+            // the br tag is just to display each result stack on each other 
 
-            // the br tag is just to display wach result stack on each other 
-            
-            var todayWeatherInfo = "Current Weather for " + cityName + ":<br>" +
-                "Date: " + date + "<br>" + // this displays the date 
-                "Time: " + time + "<br>" + // thus displayes the time
-            "Temperature: " + weatherCallData.main.temp + 'K<br>' +// this displays temp in kelvin
-            "Weather Condition: <img src='http://openweathermap.org/img/wn/" + weatherCallData.weather[0].icon + ".png'><br>" + // this dsplays the imgae instead of the description the link on the code directs you to the images on open weather.
-                "Wind Speed: " + weatherCallData.wind.speed + 'm/s<br>' + // this displays the wind speed in meters per seconds
-                "Humidity: " + weatherCallData.main.humidity + '%'; // this displays the himidity 
+            var todayWeatherInfo = cityName + date + "<br>" +// this displays city, date and time in one role 
+
+             "<img src='http://openweathermap.org/img/wn/" + weatherCallData.weather[0].icon + ".png'><br>" +
+            // this displays the image instead of the description, the link on the code directs you to the images on open weather API.
+
+            "Temp: " + weatherCallData.main.temp + 'K<br>' +// this displays temp in kelvin
+
+                "Wind: " + weatherCallData.wind.speed + 'm/s<br>' + // this displays the wind speed in meters per seconds
+
+                "Humidity: " + weatherCallData.main.humidity + '%'; // this displays the humidity 
 
             document.getElementById("todayWeather").innerHTML = todayWeatherInfo;
             return getForecast(city);
@@ -80,11 +82,26 @@ function getForecast(city){
         .then(function(forecastData) {
             console.log(forecastData);
         })
+
+// Function to display a 5 days forecast as well 
+  .then(function(forecastData){
+
+  })
+
+
+
+
+
+
+
+
+
+
+
         // this is to help catch error if there is on the console
         .catch(function(error) {
             console.error('Error in showWeather:', error);
         });
-}
 
 
 
@@ -93,7 +110,7 @@ function getForecast(city){
 
 
 
-
+    }
 
  document.addEventListener('DOMContentLoaded', function() {
     var button = document.getElementById('searchBtn');
