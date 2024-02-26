@@ -1,7 +1,7 @@
 var searchBar = document.querySelector('search');
 var citySearch = document.getElementById("city-Search");
-var  form = document.getElementById("searchForm");
-var searchBtn=document.getElementById("searchBtn");
+
+
 
 
 //Api Key
@@ -64,14 +64,19 @@ function getForecast(city){
             var date = "<strong style='font-size: larger;'>" + dateTime.toLocaleDateString() + "</strong>";
            
             // the br tag is just to display each result stack on each other 
+
+             // (weatherCallData.main.temp  - 273.15) calculates the temperature in Celsius, and .toFixed(2) rounds it to two decimal places.  0 Kelvin (-273.15 degrees Celsius) is absolute zero,  convert Kelvin to Celsius, you subtract 273.15 from the temperature in Kelvin
+
             var formattedDateTime = cityName + " (" + date + ")";
+            var temperatureCelsius = (weatherCallData.main.temp - 273.15).toFixed(2); // Convert temperature to Celsius
+
 
            var todayWeatherInfo = "Current Weather for " + formattedDateTime + ":<br>" +// this displays city, date and time in one role 
 
              "<img src='http://openweathermap.org/img/wn/" + weatherCallData.weather[0].icon + ".png'><br>" +
             // this displays the image instead of the description, the link on the code directs you to the images on open weather API.
 
-            "Temp: " + weatherCallData.main.temp + 'K<br>' +// this displays temp in kelvin
+            "Temp: " + temperatureCelsius + '&deg;C<br>' + // Display temperature in Celsius
 
                 "Wind: " + weatherCallData.wind.speed + 'm/s<br>' + // this displays the wind speed in meters per seconds
 
@@ -80,37 +85,43 @@ function getForecast(city){
             document.getElementById("todayWeather").innerHTML = todayWeatherInfo;
             return getForecast(city);
         })
-
         .then(function(forecastData) {
             var forecastInfo = '5-Day Forecast:<br>';
-            forecastData.list.forEach(function(dayForecast) {
-                var dateTime = new Date();
-                dateTime.setTime(dayForecast.dt * 1000);
-                var date = "<strong style='font-size: larger;'>" + dateTime.toLocaleDateString() + "</strong>";
-                var weatherIcon = "<img src='http://openweathermap.org/img/wn/" + dayForecast.weather[0].icon + ".png'>";
-                var temperature = dayForecast.main.temp + 'K';
-                
-                var weatherDescription = dayForecast.weather[0].description;
+            var currentDate = new Date();
+            currentDate.setDate(currentDate.getDate() + 1); // Set the date to tomorrow
+        
+            for (var i = 0; i < 4; i++) {
+                var nextDayForecast = forecastData.list[i]; // Get the forecast data for the next day
+        
+                if (nextDayForecast) {
+                    var date = currentDate.toLocaleDateString();
+                    var weatherIcon = "<img src='http://openweathermap.org/img/wn/" + dayForecast.weather[0].icon + ".png'>";
+                    var weatherDescription = dayForecast.weather[0].description;
 
-                forecastInfo += "<strong>" + date + "</strong>: " +
-                    "Temperature: " + temperature + ", " +
-                    "Weather Condition: " + weatherIcon + " " + weatherDescription + '<br>';
-            });
+                // (dayForecast.main.temp - 273.15) calculates the temperature in Celsius, and .toFixed(2) rounds it to two decimal places.  0 Kelvin (-273.15 degrees Celsius) is absolute zero,  convert Kelvin to Celsius, you subtract 273.15 from the temperature in Kelvin
+                var temperatureCelsius = (dayForecast.main.temp - 273.15).toFixed(2);
+                var humidity = nextDayForecast.main.humidity;
 
-            document.getElementById("displays").innerHTML = forecastInfo;
-        })
-        .catch(function(error) {
-            console.error('Error in showWeather:', error);
-        });
+
+                forecastInfo += "<strong>" + date + "</strong>:<br>" +
+                "Weather Condition: " + weatherIcon + " " + weatherDescription + '<br>' +
+                "Temperature: " + temperatureCelsius + "&deg;C<br>" +
+                "Humidity: " + humidity + "%<br><br>";
+        }
+
+        currentDate.setDate(currentDate.getDate() + 1); // this adds 1 more day to current day 
+
+
+    }
+
+    document.getElementById("displays").innerHTML = forecastInfo;
+
+})
+    .catch(function(error) {
+        console.error('Error fetching forecast data:', error);
+        document.getElementById("displays").innerHTML = "Error fetching forecast data. Please try again later.";
+    });
 }
-
-
-
-
-
-
-
-
     
 
  document.addEventListener('DOMContentLoaded', function() {
