@@ -95,36 +95,32 @@ function getForecast(city){
         
                 if (nextDayForecast) {
                     var date = currentDate.toLocaleDateString();
-                    var weatherIcon = "<img src='http://openweathermap.org/img/wn/" + dayForecast.weather[0].icon + ".png'>";
-                    var weatherDescription = dayForecast.weather[0].description;
+                    var weatherIcon = "<img src='http://openweathermap.org/img/wn/" + nextDayForecast.weather[0].icon + ".png'>";
+                    var weatherDescription = nextDayForecast.weather[0].description;
 
                 // (dayForecast.main.temp - 273.15) calculates the temperature in Celsius, and .toFixed(2) rounds it to two decimal places.  0 Kelvin (-273.15 degrees Celsius) is absolute zero,  convert Kelvin to Celsius, you subtract 273.15 from the temperature in Kelvin
-                var temperatureCelsius = (dayForecast.main.temp - 273.15).toFixed(2);
-                var humidity = nextDayForecast.main.humidity;
+                var temperatureCelsius = (nextDayForecast.main.temp - 273.15).toFixed(2);
+            var humidity = nextDayForecast.main.humidity;
 
-
-                forecastInfo += "<strong>" + date + "</strong>:<br>" +
+            forecastInfo += "<strong>" + date + "</strong>:<br>" +
                 "Weather Condition: " + weatherIcon + " " + weatherDescription + '<br>' +
                 "Temperature: " + temperatureCelsius + "&deg;C<br>" +
                 "Humidity: " + humidity + "%<br><br>";
         }
 
-        currentDate.setDate(currentDate.getDate() + 1); // this adds 1 more day to current day 
-
-
+        currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
     }
 
     document.getElementById("displays").innerHTML = forecastInfo;
-
 })
-    .catch(function(error) {
-        console.error('Error fetching forecast data:', error);
-        document.getElementById("displays").innerHTML = "Error fetching forecast data. Please try again later.";
-    });
-}
-    
+.catch(function(error) {
+    console.error('Error fetching forecast data:', error);
+    document.getElementById("displays").innerHTML = "Error fetching forecast data. Please try again later.";
+})
 
- document.addEventListener('DOMContentLoaded', function() {
-    var button = document.getElementById('searchBtn');
-    button.addEventListener('click', showWeather);
-});
+ };
+
+document.addEventListener('DOMContentLoaded', function() {
+var button = document.getElementById('searchBtn');
+button.addEventListener('click', showWeather);
+})
