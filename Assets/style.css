@@ -6,17 +6,17 @@
 #city-Search{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size:25px;
-    margin-top:30px;
+    margin-top:10px;
     margin-bottom:20px;
 }
 
 header{
-    font-size:50px;
+    font-size:40px;
     align-items: center;
     padding:10px;
-    background-color:darkgoldenrod;
+    background-color: lightblue;
     text-align: center;
-    margin-bottom:7px;
+    margin-bottom:20px;
 }
 
 body {
@@ -25,8 +25,101 @@ body {
   }
 
 
-  .present-Day{
-    padding:30px;
-    height:40px;
-    width:40px;
+  #cityName{
+    padding:8px;
+    height:40%;
+    width:200px;
+    margin-bottom:20px;
+    margin-left:10px;
+    margin-right:10px;
+    border:2px solid #ccc;
   }
+
+  #searchBtn{
+    height:40px;
+    width:100px;
+    border:none;
+    background-color:lightblue;
+    cursor:pointer;
+    border-radius:5px;
+    
+  }
+
+#searchBtn:hover{
+    background-color:#0077f7;
+}
+
+/* this displays the current weather */
+#todayWeather {
+    padding: 10px;
+    background-color: #dee6f0;
+    border-radius: 5px;
+    max-width: 900px;
+    margin: 0 auto 20px; /
+}
+
+/* this targets the displays */
+#displays{
+    padding: 10px;
+    background: linear-gradient(45deg, #66ccff, #3366ff);
+    border-radius: 4px;
+    margin: 0 auto 20px;
+}
+
+/*#displays > * {
+    margin-right: 10px; 
+    
+  
+}*/
+/* this targets Style for temperature, wind, and humidity elements */
+.weather-info {
+    display: flex; 
+    margin: 8px; 
+    background: linear-gradient(45deg, #66ccff, #3366ff);
+    border: 1px solid #cccccc; 
+    border-radius: 5px; 
+    padding: 15px; 
+    min-width:100px;
+    
+}
+/* this targets the 5-Day Forecast oon the display comtainer */
+.forecast-title {
+    font-weight: bold;
+    font-size: 24px; 
+    color: #333; 
+    margin-top:5%; 
+    margin-left:1%;
+}
+
+
+
+/* this targets the container itsel of teh todays weather */
+.weather-container {
+    padding: 10px;
+    margin-bottom: 20px; 
+    background-color: #ffffff; 
+    border: 1px solid #cccccc; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.weather-container img {
+    
+    margin: 0 auto 10px; 
+}
+
+/* this displays the img on the todaysweather */
+.weather-icon {
+    display: block;
+    margin: 0 auto 10px; /* Center the image */
+    width: 120px; 
+    height: 120px;
+}
+/*this targets the image on the 5 days weather displays*/
+#displays img {
+    width: 100px;
+    height: 100px; 
+    margin-bottom: 10px; 
+}
+
+
