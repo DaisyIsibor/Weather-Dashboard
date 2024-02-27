@@ -4,7 +4,14 @@
 
 This is a weather dashboard that pulls up the weather for the week including Todays weather when searched for a city.
 
+![alt text](<Page 1.png>)
 
+
+
+![alt text](<Page 2.png>)
+
+
+![alt text](<page 3.png>)
 
 ## Resources 
 

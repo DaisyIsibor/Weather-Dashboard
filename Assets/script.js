@@ -63,10 +63,11 @@ function showWeather() {
 
 
 
-            var currentWeatherInfo = "Current Weather for " + formattedDateTime + ":<br>" + "<img src='" + weatherIconUrl + "' alt='Weather Icon'><br>" +
+            var currentWeatherInfo = "<div class='weather-container'>" + formattedDateTime + ":<br>" + "<img src='" + weatherIconUrl + "' alt='Weather Icon'class='weather-icon'><br>" +
             "Temperature: " + temperatureCelsius + '&deg;C<br>' +
             "Wind: " + weatherCallData.wind.speed + 'm/s<br>' +
-            "Humidity: " + weatherCallData.main.humidity + '%<br>';
+            "Humidity: " + weatherCallData.main.humidity + '%<br>' +
+            "</div>";
 
             document.getElementById("todayWeather").innerHTML = currentWeatherInfo;
             return getForecast(city);
@@ -97,7 +98,7 @@ function showWeather() {
                     var humidity = nextDayForecast.main.humidity;
 
                     //this displays in below format when shown
-                    forecastInfo += "<strong>" + date + "</strong>:<br>" +
+                    forecastInfo +=  "<div class='weather-info'><strong>" + date + "</strong>:<br>" +
                         "Weather Condition: " + weatherIcon + " " + weatherDescription + '<br>' +
                         "Temperature: " + temperatureCelsius + "&deg;C<br>" +
                         "Humidity: " + humidity + "%<br><br>";
