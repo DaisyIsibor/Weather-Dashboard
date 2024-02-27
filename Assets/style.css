@@ -17,6 +17,8 @@ header{
     background-color: lightblue;
     text-align: center;
     margin-bottom:20px;
+    display:flex;
+    justify-content:center;
 }
 
 body {
@@ -55,7 +57,10 @@ body {
     background-color: #dee6f0;
     border-radius: 5px;
     max-width: 900px;
-    margin: 0 auto 20px; /
+    margin: 0 auto 20px; 
+    flex: 1;
+    
+  
 }
 
 /* this targets the displays */
@@ -64,13 +69,19 @@ body {
     background: linear-gradient(45deg, #66ccff, #3366ff);
     border-radius: 4px;
     margin: 0 auto 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between; 
+    overflow-x: auto;
+    
+}
+#displays > * {
+    flex: 1; 
+    margin-right: 10px;
+    margin-bottom: 10px; 
 }
 
-/*#displays > * {
-    margin-right: 10px; 
-    
-  
-}*/
+
 /* this targets Style for temperature, wind, and humidity elements */
 .weather-info {
     display: flex; 
@@ -80,6 +91,7 @@ body {
     border-radius: 5px; 
     padding: 15px; 
     min-width:100px;
+    
     
 }
 /* this targets the 5-Day Forecast oon the display comtainer */
@@ -93,7 +105,7 @@ body {
 
 
 
-/* this targets the container itsel of teh todays weather */
+/* this targets the container itsel of the todays weather */
 .weather-container {
     padding: 10px;
     margin-bottom: 20px; 
@@ -101,17 +113,21 @@ body {
     border: 1px solid #cccccc; 
     border-radius: 5px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
 }
 
 .weather-container img {
-    
+    display: block;
     margin: 0 auto 10px; 
 }
 
 /* this displays the img on the todaysweather */
 .weather-icon {
-    display: block;
-    margin: 0 auto 10px; /* Center the image */
+    display: flex;
+    align-items: center;
+    justify-content: center;margin: 0 auto 10px; 
     width: 120px; 
     height: 120px;
 }
@@ -123,3 +139,36 @@ body {
 }
 
 
+@media screen and (max-width: 768px) {
+    .weather-info,
+    .weather-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .weather-info,
+    .weather-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .weather-info,
+    .weather-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+@media screen and (min-width: 993px) and (max-width: 1703px) {
+    #displays {
+        max-width: 100%;
+        display:flex;
+        flex:1;
+        overflow-x:auto;
+    }
+}
