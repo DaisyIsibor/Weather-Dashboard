@@ -10,7 +10,7 @@ var apiKey = '41428fb0a9890c868f611f78c6401a98'
 
 // Function to fetch current weather data for a given city added metric to URL
 function getweatherCall(city) {
-    var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     return fetch(apiUrl)
         .then(function(response) {
@@ -28,7 +28,7 @@ function getweatherCall(city) {
 
 // Function to fetch the 5-day forecast data for a given city
 function getForecast(city) {
-    var apiUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+    var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
     return fetch(apiUrl)
         .then(function(response) {
