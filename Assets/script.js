@@ -56,7 +56,7 @@ function showWeather() {
           // this just displays the time in parentheses and in a format
             var formattedDateTime = "<strong style='font-size: 24px;'>"+  cityName + " (" + date + ")</strong>";
 
-            var weatherIconUrl = "http://openweathermap.org/img/wn/" + weatherCallData.weather[0].icon + ".png";
+            var weatherIconUrl = "https://openweathermap.org/img/wn/" + weatherCallData.weather[0].icon + ".png";
             var temperatureCelsius = weatherCallData.main.temp.toFixed(2); // Temperature is already in Celsius by adding &unit=metric on url
 
             // this displayed todays's wather or current weather and weather icon 
@@ -90,7 +90,7 @@ function showWeather() {
                     var date = currentDate.toLocaleDateString();
 
                     // This is declared because it is displayed , this is to display the images description of weather img ,link will take you to the imges link on open weather API
-                    var weatherIcon = "<img src='http://openweathermap.org/img/wn/" + nextDayForecast.weather[0].icon + ".png'>";
+                    var weatherIcon = "<img src='https://openweathermap.org/img/wn/" + nextDayForecast.weather[0].icon + ".png'>";
                     var weatherDescription = nextDayForecast.weather[0].description;
                     var temperatureCelsius = nextDayForecast.main.temp.toFixed(2); // Temperature is already in Celsius
 
