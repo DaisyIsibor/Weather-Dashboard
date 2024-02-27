@@ -50,11 +50,11 @@ function showWeather() {
    // this displays the Name of the city, dates and this is displayed per local time and added some styles
     getweatherCall(city)
     .then(function(weatherCallData) {
-        var cityName = "<strong style='font-size: larger;'>" + weatherCallData.name + "</strong>";
+        var cityName = "<strong style='font-size: 30px;'>" + weatherCallData.name + "</strong>";
         var dateTime = new Date();
-        var date = "<strong style='font-size: larger;'>" + dateTime.toLocaleDateString() + "</strong>";
+        var date = "<strong style='font-size: 26px;'>" + dateTime.toLocaleDateString() + "</strong>";
           // this just displays the time in parentheses and in a format
-            var formattedDateTime = cityName + " (" + date + ")";
+            var formattedDateTime = "<strong style='font-size: 24px;'>"+  cityName + " (" + date + ")</strong>";
 
             var weatherIconUrl = "http://openweathermap.org/img/wn/" + weatherCallData.weather[0].icon + ".png";
             var temperatureCelsius = weatherCallData.main.temp.toFixed(2); // Temperature is already in Celsius by adding &unit=metric on url
@@ -73,7 +73,7 @@ function showWeather() {
         })
         // this is to display 5 day forcast since current day already displayed 
         .then(function(forecastData) {
-            var forecastInfo = '5-Day Forecast:<br>';
+            var forecastInfo = "" ;//'5-Day Forecast:<br>';
             var currentDate = new Date();
             currentDate.setDate(currentDate.getDate() + 1); // Set the date to tomorrow 
 
@@ -103,10 +103,12 @@ function showWeather() {
                         "Humidity: " + humidity + "%<br><br>";
                 }
 
-              //  currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+               currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
             }
 
             document.getElementById("displays").innerHTML = forecastInfo;
+
+            document.getElementById('forecastTitle').classList.add('forecast-title');
         })
         .catch(function(error) {
             console.error('Error in showWeather:', error);
